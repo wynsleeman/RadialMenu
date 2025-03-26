@@ -18,6 +18,15 @@ namespace RadialMenu.Controls
             get { return (int)GetValue(IndexProperty); }
             set { SetValue(IndexProperty, value); }
         }
+        public static readonly DependencyProperty RingProperty =
+            DependencyProperty.Register("Ring", typeof(int), typeof(RadialMenuItem),
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure, UpdateItemRendering));
+
+        public int Ring
+        {
+            get { return (int)GetValue(RingProperty); }
+            set { SetValue(RingProperty, value); }
+        }
 
         public static readonly DependencyProperty CountProperty =
             DependencyProperty.Register("Count", typeof(int), typeof(RadialMenuItem),
@@ -228,7 +237,7 @@ namespace RadialMenu.Controls
         public double AngleDelta
         {
             get { return (double)GetValue(AngleDeltaProperty); }
-            protected set { SetValue(AngleDeltaPropertyKey, value); }
+            set { SetValue(AngleDeltaPropertyKey, value); }
         }
 
         protected static readonly DependencyPropertyKey StartAnglePropertyKey =
@@ -240,7 +249,7 @@ namespace RadialMenu.Controls
         public double StartAngle
         {
             get { return (double)GetValue(StartAngleProperty); }
-            protected set { SetValue(StartAnglePropertyKey, value); }
+            set { SetValue(StartAnglePropertyKey, value); }
         }
 
         protected static readonly DependencyPropertyKey RotationPropertyKey =
@@ -252,7 +261,7 @@ namespace RadialMenu.Controls
         public double Rotation
         {
             get { return (double)GetValue(RotationProperty); }
-            protected set { SetValue(RotationPropertyKey, value); }
+            set { SetValue(RotationPropertyKey, value); }
         }
 
         static RadialMenuItem()
@@ -262,8 +271,9 @@ namespace RadialMenu.Controls
 
         private static void UpdateItemRendering(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // I am moving this logic into the parent menu
             RadialMenuItem item = d as RadialMenuItem;
-            if (item != null)
+            if (item != null && item.Ring == 0)
             {
                 var angleDelta = 360.0 / item.Count;
                 var angleShift = item.HalfShifted ? -angleDelta / 2 : 0;

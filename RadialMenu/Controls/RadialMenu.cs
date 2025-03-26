@@ -68,11 +68,62 @@ namespace RadialMenu.Controls
 
         protected override Size ArrangeOverride(Size arrangeSize)
         {
-            for (int i = 0, count = Items.Count; i < count; i++)
+            double maxRadius = 0.0;
+            double gap = 10.0;
+            for (int ring = 0; ring <= 3; ring++)
             {
-                Items[i].Index = i;
-                Items[i].Count = count;
-                Items[i].HalfShifted = HalfShiftedItems;
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    if (Items[i].Ring == ring - 1)
+                    {
+                        maxRadius = System.Math.Max(maxRadius, Items[i].EdgeOuterRadius + gap);
+                    }
+                }
+                int count = 0;
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    if (Items[i].Ring == ring)
+                    {
+                        count += 1;
+                    }
+                }
+                int inx = 0;
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    RadialMenuItem item = Items[i];
+                    if (item.Ring == ring)
+                    {
+                        item.Index = inx;
+                        if(item.Count == 1)
+                        {
+                            item.Count = count;
+                        }
+                        if(item.InnerRadius < maxRadius)
+                        {
+
+                            item.HalfShifted = HalfShiftedItems;
+                            item.ArrowRadius += maxRadius - item.InnerRadius;
+                            item.ContentRadius += maxRadius - item.InnerRadius;
+                            item.EdgeInnerRadius += maxRadius - item.InnerRadius;
+                            item.EdgeOuterRadius += maxRadius - item.InnerRadius;
+                            
+                            item.OuterRadius += maxRadius - item.InnerRadius;
+                            //Do this last !
+                            item.InnerRadius = maxRadius;
+                            //RadialMenuItem item = d as RadialMenuItem;
+                            //if (item != null)
+                            //{
+                            var angleDelta = 360.0 / item.Count;
+                            var angleShift = item.HalfShifted ? -angleDelta / 2 : 0;
+                            var startAngle = angleDelta * item.Index + angleShift;
+                            var rotation = startAngle + angleDelta / 2;
+                            item.AngleDelta = angleDelta;
+                            item.StartAngle = startAngle;
+                            item.Rotation = rotation;
+                        }
+                        inx += 1;
+                    }
+                }
             }
             return base.ArrangeOverride(arrangeSize);
         }

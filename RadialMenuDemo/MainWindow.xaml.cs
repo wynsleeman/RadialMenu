@@ -1,11 +1,30 @@
-﻿using RadialMenuDemo.Utils;
+﻿using RadialMenu.Controls;
+using RadialMenuDemo.Utils;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace RadialMenuDemo
 {
+    class Item
+    {
+
+        public Item()
+        {
+
+        }
+    }
+    class Ring
+    {
+        List<Item> items;
+        int Count = 6;
+        public Ring() {
+            items = new List<Item>();
+        }
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -145,6 +164,55 @@ namespace RadialMenuDemo
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            grdMenu2.Children.Clear();
+            
+            RadialMenu.Controls.RadialMenu mnu = new RadialMenu.Controls.RadialMenu();
+            List<RadialMenuItem> lst = new List<RadialMenuItem>();
+            for (int ii = 0; ii < 6; ii++)
+            {
+                RadialMenuItem item = new RadialMenuItem();
+                TextBlock tb = new TextBlock();
+                item.ToolTip = "Hello Mel";
+                tb.FontSize = 20;
+                tb.Text = ii.ToString();
+                item.Content = tb;
+                lst.Add(item);
+            }
+            for (int ii = 0; ii <4; ii++)
+            {
+                RadialMenuItem item = new RadialMenuItem();
+                item.Ring = 1;
+                item.Count = 10;
+                item.Click += Item_Click;
+                TextBlock tb = new TextBlock();
+                tb.Text = ii.ToString() + "a";
+                item.Content = tb;
+                lst.Add(item);
+            }
+            for (int ii = 0; ii < 3; ii++)
+            {
+                RadialMenuItem item = new RadialMenuItem();
+                item.Ring = 2;
+                item.Count = 15;
+                item.Click += Item_Click;
+                TextBlock tb = new TextBlock();
+                tb.Text = ii.ToString() + "a";
+                item.Content = tb;
+                lst.Add(item);
+            }
+            mnu.Items = lst;
+            grdMenu2.Children.Add(mnu);
+            mnu.IsOpen = true;
+        }
+
+        private void Item_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+            throw new System.NotImplementedException();
         }
     }
 }

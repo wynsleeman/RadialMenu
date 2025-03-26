@@ -22,8 +22,10 @@
 
             <!-- RadialMenuItem style when overed -->
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="EdgeBackground" Value="#999"/>
-                <Setter Property="Panel.ZIndex" Value="10"/>
+                <Setter Property="Background" Value="#FFF1E1"/>
+                <Setter Property="BorderBrush" Value="#FF7706"/>
+                <Setter Property="EdgeBackground" Value="#FF7706"/>
+                <Setter Property="ArrowBackground" Value="White"/>
             </Trigger>
 
             <!-- RadialMenuItem style when pressed -->
@@ -47,14 +49,14 @@
         <Setter Property="CenterY" Value="150"/>
         <Setter Property="InnerRadius" Value="30"/>
         <Setter Property="OuterRadius" Value="150"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="AliceBlue"/>
         <Setter Property="Foreground" Value="#111"/>
         <Setter Property="EdgeInnerRadius" Value="135"/>
         <Setter Property="EdgeOuterRadius" Value="150"/>
         <Setter Property="EdgeBackground" Value="#CCC"/>
         <Setter Property="EdgePadding" Value="2"/>
         <Setter Property="ContentRadius" Value="82.5"/>
-        <Setter Property="ArrowBackground" Value="#FFF"/>
+        <Setter Property="ArrowBackground" Value="Black"/>
         <Setter Property="ArrowRadius" Value="142.5"/>
         <Setter Property="ArrowWidth" Value="14"/>
         <Setter Property="ArrowHeight" Value="14"/>

@@ -17,10 +17,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <WrapPanel HorizontalAlignment="Center">
-                <Button Content="Open Default" Command="{Binding OpenRadialMenu1}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="40 10" Margin="10"/>
-                <Button Content="Open Half-Shifted" Command="{Binding OpenRadialMenu2}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="40 10" Margin="10"/>
-            </WrapPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Open Default" Command="{Binding OpenRadialMenu1}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button Content="Open Half-Shifted" Command="{Binding OpenRadialMenu2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="2 Ring" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -209,6 +210,9 @@
                 </RadialMenu:RadialMenuItem>
 
             </RadialMenu:RadialMenu>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="grdMenu2" >
+            
         </Grid>
     </Grid>
 
